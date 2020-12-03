@@ -44,12 +44,12 @@ std::string base64Decode(absl::string_view input) {
 
 SpanContextPtr SpanContext::spanContextFromRequest(Http::RequestHeaderMap& headers) {
   auto propagation_header = headers.get(propagationHeader());
-  if (propagation_header.empty()) {
+  if (propagation_header == nullptr) {
     // No propagation header then Envoy is first hop.
     return nullptr;
   }
 
-  auto header_value_string = propagation_header[0]->value().getStringView();
+  auto header_value_string = propagation_header->value().getStringView();
   const auto parts = StringUtil::splitToken(header_value_string, "-", false, true);
   // Reference:
   // https://github.com/apache/skywalking/blob/v8.1.0/docs/en/protocols/Skywalking-Cross-Process-Propagation-Headers-Protocol-v3.md.
@@ -151,7 +151,9 @@ void SpanStore::injectContext(Http::RequestHeaderMap& request_headers) const {
   }
 
   ENVOY_LOG(debug, "Inject or update SkyWalking propagation header in upstream request headers");
-  const_cast<SpanStore*>(this)->setPeerAddress(std::string(request_headers.getHostValue()));
+  // FIXME: 
+  const_cast<SpanStore*>(this)->setPeerAddress(std::string("NOTFOUND"));
+  // const_cast<SpanStore*>(this)->setPeerAddress(std::string(request_headers.getHostValue()));
 
   ENVOY_LOG(trace, "'sw8' header: '({}) - ({}) - ({}) - ({}) - ({}) - ({}) - ({}) - ({})'",
             sampled_, segment_context_->traceId(), segment_context_->traceSegmentId(), span_id_,
