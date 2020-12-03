@@ -22,6 +22,9 @@ ZIPKINAPI_SHA256 = "688c4fe170821dd589f36ec45aaadc03a618a40283bc1f97da8fa11686fc
 RULES_PROTO_GIT_SHA = "2c0468366367d7ed97a1f702f9cd7155ab3f73c5"  # Nov 19, 2019
 RULES_PROTO_SHA256 = "73ebe9d15ba42401c785f9d0aeebccd73bd80bf6b8ac78f74996d31f2c0ad7a6"
 
+SKYWALKING_RELEASE = "8.1.0"
+SKYWALKING_SHA256 = "ebea8a6968722524d1bcc4426fb6a29907ddc2902aac7de1559012d3eee90cf9"
+
 REPOSITORY_LOCATIONS = dict(
     bazel_skylib = dict(
         sha256 = BAZEL_SKYLIB_SHA256,
@@ -67,10 +70,9 @@ REPOSITORY_LOCATIONS = dict(
         project_name = "SkyWalking API",
         project_desc = "SkyWalking's language independent model and gRPC API Definitions",
         project_url = "https://github.com/apache/skywalking-data-collect-protocol",
-        version = "8.1.0",
-        sha256 = "ebea8a6968722524d1bcc4426fb6a29907ddc2902aac7de1559012d3eee90cf9",
-        strip_prefix = "skywalking-data-collect-protocol-{version}",
-        urls = ["https://github.com/apache/skywalking-data-collect-protocol/archive/v{version}.tar.gz"],
+        sha256 = SKYWALKING_SHA256,
+        strip_prefix = "skywalking-data-collect-protocol-" + SKYWALKING_RELEASE,
+        urls = ["https://github.com/apache/skywalking-data-collect-protocol/archive/v" + SKYWALKING_RELEASE + ".tar.gz"],
         release_date = "2020-07-29",
         use_category = ["api"],
     ),
