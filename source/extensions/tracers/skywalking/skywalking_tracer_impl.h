@@ -36,7 +36,7 @@ private:
   SkyWalkingClientConfigPtr client_config_;
 
   // This random_generator_ will be used to create SkyWalking trace id and segment id.
-  Random::RandomGenerator& random_generator_;
+  Runtime::RandomGenerator& random_generator_;
   ThreadLocal::SlotPtr tls_slot_ptr_;
 };
 

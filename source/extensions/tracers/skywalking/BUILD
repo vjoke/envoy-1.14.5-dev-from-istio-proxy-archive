@@ -33,7 +33,7 @@ envoy_cc_library(
     hdrs = ["skywalking_types.h"],
     deps = [
         ":skywalking_stats_lib",
-        "//include/envoy/common:random_generator_interface",
+        # "//include/envoy/common:random_generator_interface",
         "//include/envoy/common:time_interface",
         "//include/envoy/http:header_map_interface",
         "//include/envoy/tracing:http_tracer_interface",

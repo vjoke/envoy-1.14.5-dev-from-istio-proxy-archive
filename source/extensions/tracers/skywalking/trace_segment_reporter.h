@@ -26,7 +26,7 @@ class TraceSegmentReporter : public Logger::Loggable<Logger::Id::tracing>,
                              public Grpc::AsyncStreamCallbacks<Commands> {
 public:
   explicit TraceSegmentReporter(Grpc::AsyncClientFactoryPtr&& factory,
-                                Event::Dispatcher& dispatcher, Random::RandomGenerator& random,
+                                Event::Dispatcher& dispatcher, Runtime::RandomGenerator& random,
                                 SkyWalkingTracerStats& stats,
                                 const SkyWalkingClientConfig& client_config);
 
@@ -66,7 +66,7 @@ private:
   Grpc::AsyncStream<SegmentObject> stream_{};
   const Protobuf::MethodDescriptor& service_method_;
 
-  Random::RandomGenerator& random_generator_;
+  Runtime::RandomGenerator& random_generator_;
   // If the connection is unavailable when reporting data, the created SegmentObject will be cached
   // in the queue, and when a new connection is established, the cached data will be reported.
   std::queue<TraceSegmentPtr> delayed_segments_cache_;

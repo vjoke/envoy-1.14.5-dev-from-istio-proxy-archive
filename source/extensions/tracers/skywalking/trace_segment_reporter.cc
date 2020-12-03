@@ -80,7 +80,7 @@ TraceSegmentPtr toSegmentObject(const SegmentContext& segment_context) {
 
 TraceSegmentReporter::TraceSegmentReporter(Grpc::AsyncClientFactoryPtr&& factory,
                                            Event::Dispatcher& dispatcher,
-                                           Random::RandomGenerator& random_generator,
+                                           Runtime::RandomGenerator& random_generator,
                                            SkyWalkingTracerStats& stats,
                                            const SkyWalkingClientConfig& client_config)
     : tracing_stats_(stats), client_config_(client_config), client_(factory->create()),

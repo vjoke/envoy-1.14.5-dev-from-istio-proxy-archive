@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "envoy/common/random_generator.h"
+// #include "envoy/common/random_generator.h"
+#include "envoy/runtime/runtime.h"
 #include "envoy/common/time.h"
 #include "envoy/http/header_map.h"
 #include "envoy/tracing/http_tracer.h"
@@ -73,7 +74,7 @@ public:
    * @param decision The tracing decision.
    */
   SegmentContext(SpanContextPtr&& previous_span_context, Tracing::Decision decision,
-                 Random::RandomGenerator& random_generator);
+                 Runtime::RandomGenerator& random_generator);
 
   /*
    * Set service name.

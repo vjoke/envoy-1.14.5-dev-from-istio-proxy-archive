@@ -21,7 +21,7 @@ const Http::LowerCaseString& propagationHeader() {
   CONSTRUCT_ON_FIRST_USE(Http::LowerCaseString, "sw8");
 }
 
-std::string generateId(Random::RandomGenerator& random_generator) {
+std::string generateId(Runtime::RandomGenerator& random_generator) {
   return absl::StrCat(Hex::uint64ToHex(random_generator.random()),
                       Hex::uint64ToHex(random_generator.random()));
 }
@@ -96,7 +96,7 @@ SpanContextPtr SpanContext::spanContextFromRequest(Http::RequestHeaderMap& heade
 }
 
 SegmentContext::SegmentContext(SpanContextPtr&& previous_span_context, Tracing::Decision decision,
-                               Random::RandomGenerator& random_generator)
+                               Runtime::RandomGenerator& random_generator)
     : previous_span_context_(std::move(previous_span_context)) {
 
   if (previous_span_context_) {
