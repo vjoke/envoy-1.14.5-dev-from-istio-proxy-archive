@@ -50,7 +50,7 @@ envoy_cc_library(
     hdrs = ["skywalking_client_config.h"],
     deps = [
         "//include/envoy/secret:secret_provider_interface",
-        "//include/envoy/server:factory_context_interface",
+        # "//include/envoy/server:factory_context_interface",
         "//include/envoy/server:tracer_config_interface",
         "//source/common/config:datasource_lib",
         "@envoy_api//envoy/config/trace/v3:pkg_cc_proto",
