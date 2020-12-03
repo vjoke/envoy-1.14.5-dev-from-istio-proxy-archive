@@ -9,8 +9,9 @@ namespace SkyWalking {
 
 namespace {
 
-Http::RegisterCustomInlineHeader<Http::CustomInlineHeaderRegistry::Type::RequestHeaders>
-    authentication_handle(Http::CustomHeaders::get().Authentication);
+// TODO: register custom header
+// Http::RegisterCustomInlineHeader<Http::CustomInlineHeaderRegistry::Type::RequestHeaders>
+//     authentication_handle(Http::CustomHeaders::get().Authentication);
 
 // Convert SegmentContext to SegmentObject.
 TraceSegmentPtr toSegmentObject(const SegmentContext& segment_context) {
@@ -90,7 +91,7 @@ TraceSegmentReporter::TraceSegmentReporter(Grpc::AsyncClientFactoryPtr&& factory
 
   static constexpr uint32_t RetryInitialDelayMs = 500;
   static constexpr uint32_t RetryMaxDelayMs = 30000;
-  backoff_strategy_ = std::make_unique<JitteredExponentialBackOffStrategy>(
+  backoff_strategy_ = std::make_unique<JitteredBackOffStrategy>(
       RetryInitialDelayMs, RetryMaxDelayMs, random_generator_);
 
   retry_timer_ = dispatcher.createTimer([this]() -> void { establishNewStream(); });
@@ -99,7 +100,8 @@ TraceSegmentReporter::TraceSegmentReporter(Grpc::AsyncClientFactoryPtr&& factory
 
 void TraceSegmentReporter::onCreateInitialMetadata(Http::RequestHeaderMap& metadata) {
   if (!client_config_.backendToken().empty()) {
-    metadata.setInline(authentication_handle.handle(), client_config_.backendToken());
+    ENVOY_LOG(warn, "Inline backendToken not supported yet");
+    // metadata.setInline(authentication_handle.handle(), client_config_.backendToken());
   }
 }
 
