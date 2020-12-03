@@ -85,8 +85,8 @@ public:
   Tracing::SpanPtr spawnChild(const Tracing::Config& config, const std::string& name,
                               SystemTime start_time) override;
   void setSampled(bool sampled) override;
-  std::string getBaggage(absl::string_view key) override;
-  void setBaggage(absl::string_view key, absl::string_view value) override;
+  std::string getBaggage(absl::string_view key);
+  void setBaggage(absl::string_view key, absl::string_view value);
 
   /*
    * Get pointer to corresponding SpanStore object. This method is mainly used in testing. Used to
